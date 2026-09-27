@@ -1,0 +1,163 @@
+{
+  "_version": "1.89.0",
+  "sap.app": {
+    "id": "buisnesspartner.project1",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.32.0",
+      "toolsId": "1cd14e87-02b1-4408-93e0-7af60f40b9a1"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/buisness-partner/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.152.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "buisnesspartner.project1.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "BusinessPartnerList",
+          "target": [
+            "BusinessPartnerList"
+          ]
+        },
+        {
+          "pattern": "BusinessPartner({key}):?query:",
+          "name": "BusinessPartnerObjectPage",
+          "target": [
+            "BusinessPartnerList",
+            "BusinessPartnerObjectPage"
+          ]
+        }
+      ],
+      "targets": {
+        "BusinessPartnerList": {
+          "type": "Component",
+          "id": "BusinessPartnerList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/BusinessPartner",
+              "variantManagement": "Page",
+              "navigation": {
+                "BusinessPartner": {
+                  "detail": {
+                    "route": "BusinessPartnerObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "creationMode": {
+                      "name": "NewPage"
+                    }
+                  },
+                  "actions": {
+                    "createBusinessPartner": {
+                      "press": "buisnesspartner.project1.ext.CreateBusinessPartner.openCreateDialog",
+                      "text": "Create ",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "BusinessPartnerObjectPage": {
+          "type": "Component",
+          "id": "BusinessPartnerObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/BusinessPartner"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  }
+}

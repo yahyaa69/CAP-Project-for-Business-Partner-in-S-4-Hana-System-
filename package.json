@@ -1,0 +1,57 @@
+{
+  "name": "PO_project",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@sap/cds": "^10",
+    "@sap-cloud-sdk/connectivity": "^4",
+    "@sap-cloud-sdk/http-client": "^4",
+    "@sap-cloud-sdk/resilience": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^3",
+    "cds-plugin-ui5": "^0.17.0"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-project1": "cds watch --open buisnesspartner.project1/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "private": true,
+  "cds": {
+    "requires": {
+      "API_PURCHASEORDER_PROCESS_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_PURCHASEORDER_PROCESS_SRV",
+        "credentials": {
+          "destination": "Capm",
+          "path": "/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV",
+          "headers": {
+            "X-Requested-With": "XMLHttpRequest"
+          },
+          "csrf": true
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "features": {
+          "batch": false
+        },
+        "credentials": {
+          "destination": "Capm",
+          "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER",
+          "headers": {
+            "X-Requested-With": "XMLHttpRequest"
+          },
+          "csrf": true
+        }
+      }
+    }
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/project1"
+  ]
+}
